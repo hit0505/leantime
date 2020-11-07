@@ -12,3 +12,4 @@
 
 <link rel="shortcut icon" href="<?=BASE_URL?>/favicon.ico"/>
 <link rel="apple-touch-icon" href="<?=BASE_URL?>/apple-touch-icon.png">
+<link rel="stylesheet" href="https://leantime.ant2.jp/css/ant2org.css">

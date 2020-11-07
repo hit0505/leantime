@@ -614,7 +614,7 @@ namespace leantime\domain\repositories {
 
         }
 
-        public function getAllMilestones($projectId, $includeArchived =false, $sortBy="headline")
+        public function getAllMilestones($projectId, $includeArchived =false, $sortBy="date")
         {
 
             $query = "SELECT
@@ -669,7 +669,7 @@ namespace leantime\domain\repositories {
                             ELSE 
                               0 
                             END) AS percentDone
-                        FROM zp_tickets AS progressSub WHERE progressSub.dependingTicketId = zp_tickets.id) AS percentDone
+                        FROM zp_tickets AS progressSub WHERE progressSub.dependingTicketId = zp_tickets.id AND progressSub.type IN ('task','subtask')) AS percentDone
 					FROM 
 						zp_tickets 
 						LEFT JOIN zp_projects ON zp_tickets.projectId = zp_projects.id

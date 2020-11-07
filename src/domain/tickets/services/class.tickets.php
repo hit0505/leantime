@@ -164,7 +164,7 @@ namespace leantime\domain\services {
 
         }
 
-        public function getAllMilestones($projectId, $includeArchived = false, $sortBy="headline")
+        public function getAllMilestones($projectId, $includeArchived = false, $sortBy="date")
         {
 
             if($projectId > 0) {
@@ -194,7 +194,7 @@ namespace leantime\domain\services {
                 'date' => date("Y-m-d H:i:s"),
                 'dateToFinish' => isset($params['dateToFinish']) ? strip_tags($params['dateToFinish']) : "",
                 'status' => isset($params['status']) ? (int) $params['status'] : 3,
-                'storypoints' => '',
+                'storypoints' => '3',
                 'hourRemaining' => '',
                 'planHours' => '',
                 'sprint' => isset($params['sprint']) ? (int) $params['sprint'] : "",

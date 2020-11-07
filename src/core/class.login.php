@@ -296,7 +296,7 @@ namespace leantime\core {
         private function setCookie($time)
         {
             $expiry = time()+$time;
-            setcookie("sid", $this->session, (int)$expiry, "/");
+            setcookie("sid", $this->session, (int)$expiry, "/;SameSite=None;", '', true, true);
         }
 
         /**

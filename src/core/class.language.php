@@ -59,18 +59,18 @@ namespace leantime\core {
             if(file_exists(''.$this->iniFolder.'languagelist.ini') === true) {
 
                 $this->langlist = parse_ini_file(''.$this->iniFolder.'languagelist.ini');
+                $browserLang = $this->getBrowserLanguage();
 
                 if($config->language != '' && (!isset($_SESSION['companysettings.language']) || $_SESSION['companysettings.language'] == '')) {
 
                     $this->setLanguage($config->language);
 
-                }elseif(isset($_SESSION['companysettings.language']) === true && $_SESSION['companysettings.language'] != '') {
+                }elseif(isset($_SESSION['companysettings.language']) === true && $_SESSION['companysettings.language'] != ''  && $_SESSION['companysettings.language'] == $browserLang ) {
 
                     $this->setLanguage($_SESSION['companysettings.language']);
 
                 }else{
 
-                    $browserLang = $this->getBrowserLanguage();
                     $this->setLanguage($browserLang);
 
                 }
@@ -164,9 +164,8 @@ namespace leantime\core {
          */
         public function getBrowserLanguage()
         {
-
+/*
             $language = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-
             if (empty($language)) {
 
                 return $this->language;
@@ -174,12 +173,36 @@ namespace leantime\core {
             }
 
             $langCode = explode("-", $language);
+var_dump($this->langlist);
 
             if(isset($this->langlist[$langCode[0]]) === true) {
 
                 return $langCode[0];
 
             }
+*/
+    $default = 'en-US';
+    if ( isset( $_SERVER[ 'HTTP_ACCEPT_LANGUAGE' ] ) ) {
+
+        $langs = explode( ',', $_SERVER['HTTP_ACCEPT_LANGUAGE'] );
+
+        if ( empty( $this->langlist ) ) {
+            return $langs[ 0 ];
+        }
+        $available = [];
+        foreach($this->langlist as $key => $l) {
+            $available[substr( $key, 0, 2 )] = $key;
+        }
+        foreach ( $langs as $lang ){
+            $lang = substr( $lang, 0, 2 );
+            if( isset($available[$lang]) ) {
+                return $available[$lang];
+            }
+        }
+    }
+    return $default;
+
+
 
         }
 

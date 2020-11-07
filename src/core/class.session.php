@@ -71,7 +71,7 @@ class session
         session_name("sid");
         session_id(self::$sid);
         session_start();
-        setcookie("sid", self::$sid, time()+$config->sessionExpiration, "/");
+        setcookie("sid", self::$sid, time()+$config->sessionExpiration, "/;SameSite=None;", "", true, true);
 
     }
 

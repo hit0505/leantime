@@ -44,7 +44,6 @@ class application
      */
     public function start()
     {
-
         $config = $this->config; // Used in template
         $settings = $this->settings; //Used in templates to show app version
         $login = $this->login;
